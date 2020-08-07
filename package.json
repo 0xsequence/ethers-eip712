@@ -1,6 +1,8 @@
 {
-  "name": "ethers-typed-data",
+  "name": "ethers-eip712",
   "version": "0.1.0",
+  "description": "Ethereum Typed Data Hashing and Signing (EIP712) implementation for ethers.js",
+  "repository": "https://github.com/arcadeum/ethers-eip712",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -8,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rimraf ./dist && rollup -c",
-    "prepublishOnly": "yarn test && yarn lint",
+    "prepublishOnly": "yarn test",
     "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
     "test:watch": "jest --watchAll",
     "test": "jest --ci --runInBand"

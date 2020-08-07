@@ -1,21 +1,21 @@
-ethers-typed-data
-=================
+ethers-eip712
+=============
 
-`ethers-typed-data` is an npm package that implements the Ethereum Typed Data (EIP712)
+`ethers-eip712` is an npm package that implements the Ethereum Typed Data (EIP712)
 for structured data hashing and signing proposal, written in TypeScript for ethers.js.
 
 EIP712: https://eips.ethereum.org/EIPS/eip-712
 
 ## Usage
 
-`yarn install ethers-typed-data` or `npm install ethers-typed-data`
+`yarn install ethers-eip712` or `npm install ethers-eip712`
 
 
 ## Example
 
 ```typescript
 import { ethers } from 'ethers'
-import { TypedDataUtils } from 'ethers-typed-data'
+import { TypedDataUtils } from 'ethers-eip712'
 
 const typedData = {
   types: {
