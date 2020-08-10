@@ -31,7 +31,7 @@ var TypedDataUtils = {
         var eip191Header = ethers.utils.arrayify('0x1901');
         var domainHash = TypedDataUtils.hashStruct(typedData, 'EIP712Domain', typedData.domain);
         var messageHash = TypedDataUtils.hashStruct(typedData, typedData.primaryType, typedData.message);
-        var pack = ethers.utils.solidityPack(['bytes', 'bytes32', 'bytes32'], [eip191Header, ethers.utils.zeroPad(domainHash, 32), ethers.utils.zeroPad(messageHash, 32)]);
+        var pack = ethers.utils.solidityPack(['bytes', 'bytes32', 'bytes32'], [eip191Header, zeroPad(domainHash, 32), zeroPad(messageHash, 32)]);
         var hashPack = ethers.utils.keccak256(pack);
         return ethers.utils.arrayify(hashPack);
     },
@@ -46,7 +46,7 @@ var TypedDataUtils = {
         var abiValues = [];
         var typeHash = TypedDataUtils.typeHash(typedData.types, primaryType);
         abiTypes.push('bytes32');
-        abiValues.push(ethers.utils.zeroPad(typeHash, 32));
+        abiValues.push(zeroPad(typeHash, 32));
         var encodeField = function (name, type, value) {
             if (types[type] !== undefined) {
                 return ['bytes32', ethers.utils.arrayify(ethers.utils.keccak256(TypedDataUtils.encodeData(typedData, type, value)))];
@@ -164,6 +164,10 @@ var buildTypedData = function (domain, messageTypes, primaryType, message) {
 };
 var domainType = function (domain) {
     return TypedDataUtils.domainType(domain);
+};
+// zeroPad is implemented as a compat layer between ethers v4 and ethers v5
+var zeroPad = function (value, length) {
+    return ethers.utils.arrayify(ethers.utils.hexZeroPad(ethers.utils.hexlify(value), length));
 };
 
 export { TypedDataUtils, buildTypedData, domainType, encodeTypedDataDigest };

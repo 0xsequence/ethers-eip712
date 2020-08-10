@@ -32,7 +32,7 @@ export const TypedDataUtils = {
 
     const pack = ethers.utils.solidityPack(
       ['bytes', 'bytes32', 'bytes32'],
-      [eip191Header, ethers.utils.zeroPad(domainHash, 32), ethers.utils.zeroPad(messageHash, 32)]
+      [eip191Header, zeroPad(domainHash, 32), zeroPad(messageHash, 32)]
     )
 
     const hashPack = ethers.utils.keccak256(pack)
@@ -52,7 +52,7 @@ export const TypedDataUtils = {
 
     const typeHash = TypedDataUtils.typeHash(typedData.types, primaryType)
     abiTypes.push('bytes32')
-    abiValues.push(ethers.utils.zeroPad(typeHash, 32))
+    abiValues.push(zeroPad(typeHash, 32))
 
     const encodeField = (name: string, type: string, value: any): (string | Uint8Array)[] => {
       if (types[type] !== undefined) {
@@ -208,4 +208,9 @@ export const buildTypedData = (domain: TypedDataDomain, messageTypes: TypedDataT
 
 export const domainType = (domain: TypedDataDomain): TypedDataArgument[] => {
   return TypedDataUtils.domainType(domain)
+}
+
+// zeroPad is implemented as a compat layer between ethers v4 and ethers v5
+const zeroPad = (value: any, length: number): Uint8Array => {
+  return ethers.utils.arrayify(ethers.utils.hexZeroPad(ethers.utils.hexlify(value), length))
 }

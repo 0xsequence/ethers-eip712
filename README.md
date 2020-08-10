@@ -10,6 +10,8 @@ EIP712: https://eips.ethereum.org/EIPS/eip-712
 
 `yarn install ethers-eip712` or `npm install ethers-eip712`
 
+NOTE: both ethers v4 and ethers v5 are compatible by this single library.
+
 
 ## Example
 

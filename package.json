@@ -21,7 +21,7 @@
   "dependencies": {
   },
   "peerDependencies": {
-    "ethers": "^5.0.8"
+    "ethers": "^4.0.47 || ^5.0.8"
   },
   "devDependencies": {
     "@types/jest": "^26.0.9",
