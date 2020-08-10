@@ -179,20 +179,32 @@ export const TypedDataUtils = {
       type.push({ name: 'salt', type: 'bytes32' })
     }
     return type
-  }
+  },
 
-  // buildTypedData(): TypedData {
-  //   return {}
-  // }
+  buildTypedData(domain: TypedDataDomain, messageTypes: TypedDataTypes, primaryType: string, message: object): TypedData {
+    const domainType = TypedDataUtils.domainType(domain)
+
+    const typedData: TypedData = {
+      domain: domain,
+      types: {
+        'EIP712Domain': domainType,
+        ...messageTypes
+      },
+      primaryType: primaryType,
+      message: message
+    }
+
+    return typedData
+  }
 }
 
 export const encodeTypedDataDigest = (typedData: TypedData): Uint8Array => {
   return TypedDataUtils.encodeDigest(typedData)
 }
 
-// export const buildTypedData = (): TypedData => {
-//   return TypedDataUtils.buildTypedData()
-// }
+export const buildTypedData = (domain: TypedDataDomain, messageTypes: TypedDataTypes, primaryType: string, message: object): TypedData => {
+  return TypedDataUtils.buildTypedData(domain, messageTypes, primaryType, message)
+}
 
 export const domainType = (domain: TypedDataDomain): TypedDataArgument[] => {
   return TypedDataUtils.domainType(domain)

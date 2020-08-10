@@ -285,4 +285,34 @@ describe('TypedData', () => {
     expect(digestHex).toEqual('0x2a3e64893ed4ba30ea34dbff3b0aa08c7677876cfdf7112362eccf3111f58d1d')
   })
   
+  test('encoding-5', () => {
+    const typedData = TypedDataUtils.buildTypedData(
+      {
+        name: 'Ether Mail',
+        version: '1',
+        chainId: 1,
+        verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC'
+      },
+      {
+        'Person': [
+          {name: "name", type: "string"},
+          {name: "wallet", type: "address"},
+        ]
+      },
+      'Person',
+      {
+        'name': 'Bob',
+        'wallet': '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB'
+      }
+    )
+
+    const domainHash = TypedDataUtils.hashStruct(typedData, 'EIP712Domain', typedData.domain)
+    const domainHashHex = ethers.utils.hexlify(domainHash)
+    expect(domainHashHex).toEqual('0xf2cee375fa42b42143804025fc449deafd50cc031ca257e0b194a650a912090f')
+
+    const digest = TypedDataUtils.encodeDigest(typedData)
+    const digestHex = ethers.utils.hexlify(digest)
+    expect(digestHex).toEqual('0x0a94cf6625e5860fc4f330d75bcd0c3a4737957d2321d1a024540ab5320fe903')
+  })
+
 })
