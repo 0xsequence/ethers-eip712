@@ -1,6 +1,6 @@
 {
   "name": "ethers-eip712",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Ethereum Typed Data Hashing and Signing (EIP712) implementation for ethers.js",
   "repository": "https://github.com/arcadeum/ethers-eip712",
   "main": "dist/index.js",
